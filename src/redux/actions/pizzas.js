@@ -1,8 +1,12 @@
 import axios from 'axios'
 
+export const Types = {
+    SET_LOADED: 'SET_LOADED',
+    SET_PIZZAS: 'SET_PIZZAS'
+}
+
 export const setLoaded = payload => ({ type: 'SET_LOADED', payload })
 export const fetchPizzas = (sortBy, category) => dispatch => {
-    console.log(sortBy, category)
     dispatch(setLoaded(false))
     axios
         .get(

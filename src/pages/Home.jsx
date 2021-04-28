@@ -1,15 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import {
     Categories,
     SortPopup,
     PizzaBlock,
     PizzaLoadingBlock
 } from '../components'
-import { useSelector, useDispatch } from 'react-redux'
 import PropTypes from 'prop-types'
 import { setCategory, setSortBy } from '../redux/actions/filters'
 import { fetchPizzas } from '../redux/actions/pizzas'
+import { addPizzaToCart } from '../redux/actions/cart'
 
 const categoryNames = [
     'Мясные',
@@ -29,6 +30,7 @@ const Home = () => {
     const pizzas = useSelector(({ pizzas }) => pizzas.items)
     const isLoaded = useSelector(({ pizzas }) => pizzas.isLoaded)
     const { category, sortBy } = useSelector(({ filters }) => filters)
+    const cartItems = useSelector(({ cart }) => cart.items)
 
     const dispatch = useDispatch()
 
@@ -44,6 +46,10 @@ const Home = () => {
     const onSelectSortType = React.useCallback(type => {
         dispatch(setSortBy(type))
     }, [])
+
+    const handleAddPizza = obj => {
+        dispatch(addPizzaToCart(obj))
+    }
 
     return (
         <div className='container'>
@@ -66,9 +72,13 @@ const Home = () => {
                 {isLoaded
                     ? pizzas.map(pizza => (
                           <PizzaBlock
-                              {...pizza}
+                              addedCount={
+                                  cartItems[pizza.id] &&
+                                  cartItems[pizza.id].length
+                              }
                               key={pizza.id}
-                              isLoading={true}
+                              onClickAddPizza={handleAddPizza}
+                              {...pizza}
                           />
                       ))
                     : Array(12)

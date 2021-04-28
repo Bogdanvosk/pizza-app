@@ -5,7 +5,6 @@ import PropTypes from 'prop-types'
 const SortPopup = React.memo(({ items, onClickSortType, activeSortType }) => {
     const [visiblePopup, setVisiblePopup] = useState(false)
     let activeLabel = items.find(obj => obj.type === activeSortType).name
-    console.log(activeLabel);
 
     const sortElem = useRef()
 
@@ -14,7 +13,8 @@ const SortPopup = React.memo(({ items, onClickSortType, activeSortType }) => {
     }, [])
 
     const handleOutsideClick = e => {
-        if (!e.path.includes(sortElem.current)) {
+        const path = e.path || (e.composedPath && e.composedPath())
+        if (!path.includes(sortElem.current)) {
             setVisiblePopup(false)
         }
     }

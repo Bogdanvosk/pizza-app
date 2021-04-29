@@ -86,7 +86,7 @@ const PizzaBlock = ({
                         />
                     </svg>
                     <span>Добавить</span>
-                    <i>{addedCount}</i>
+                    {addedCount && <i>{addedCount}</i>}
                 </Button>
             </div>
         </div>

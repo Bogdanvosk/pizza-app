@@ -4,11 +4,11 @@ export const Types = {
 }
 
 export const setSortBy = obj => ({
-    type: 'SET_SORT_BY',
+    type: Types.SET_SORT_BY,
     payload: obj
 })
 
 export const setCategory = categoryIndex => ({
-    type: 'SET_CATEGORY',
+    type: Types.SET_CATEGORY,
     payload: categoryIndex
 })

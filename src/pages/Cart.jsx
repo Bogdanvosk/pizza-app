@@ -7,6 +7,8 @@ import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
+import { Button } from '../components'
+
 import {
     clearCart,
     removeCartItem,
@@ -38,6 +40,10 @@ const Cart = () => {
 
     const onMinusCartItem = id => {
         dispatch(minusCartItem(id))
+    }
+
+    const onCLickOrder = () => {
+        console.log('ВАШ ЗАКАЗ', items)
     }
 
     return (
@@ -180,9 +186,9 @@ const Cart = () => {
 
                                 <span>Вернуться назад</span>
                             </Link>
-                            <div className='button pay-btn'>
+                            <Button className='pay-btn' onClick={onCLickOrder}>
                                 <span>Оплатить сейчас</span>
-                            </div>
+                            </Button>
                         </div>
                     </div>
                 </div>

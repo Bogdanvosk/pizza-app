@@ -98,9 +98,7 @@ const cart = (state = initialState, action) => {
             const oldObjItems = [...state.items[action.payload].items]
 
             const newObjItems =
-                oldObjItems.length > 1
-                    ? [...state.items[action.payload].items].slice(1)
-                    : oldObjItems
+                oldObjItems.length > 1 ? oldObjItems.slice(1) : oldObjItems
 
             const newItems = {
                 ...state.items,
